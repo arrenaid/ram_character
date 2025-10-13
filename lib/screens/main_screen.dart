@@ -5,6 +5,7 @@ import 'package:ram_character/bloc/character_bloc.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
+  static const String route = "main";
 
   @override
   Widget build(BuildContext context) {
