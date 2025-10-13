@@ -24,7 +24,7 @@ class NaviScreen extends StatelessWidget {
                   type: BottomNavigationBarType.fixed,
                   elevation: 0,
                   unselectedItemColor: Colors.grey,
-                  selectedItemColor: Colors.blue,
+                  selectedItemColor: Colors.pink[800],
                   selectedFontSize: 10,
                   unselectedFontSize: 10,
                   //selectedLabelStyle: tsTab,
