@@ -4,14 +4,6 @@ class FavoritesEvent extends Equatable{
   @override
   List<Object?> get props => [];
 }
-class SortedEvent extends FavoritesEvent{
-  final List<Person> favorites;
-
-  const SortedEvent({required this.favorites});
-
-  @override
-  List<Object?> get props => [favorites];
-}
 class SetIndexEvent extends FavoritesEvent{
   final int index;
   const SetIndexEvent(this.index) : super();

@@ -60,10 +60,9 @@ class _PersonSectorState extends State<PersonSector> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Имя: ${widget.person.name}'),
-                Text('Статус: ${widget.person.status}'),
-                Text('Расса: ${widget.person.species}, Пол: ${widget.person.gender}.'),
-                //Text('Тип: ${widget.person.type}', overflow: TextOverflow.fade),
+                Text('Имя: ${widget.person.name}', overflow: TextOverflow.ellipsis),
+                Text('Статус: ${widget.person.status}', overflow: TextOverflow.ellipsis),
+                Text('Расса: ${widget.person.species}, Пол: ${widget.person.gender}.', overflow: TextOverflow.ellipsis),
                 Text('Колличество серий: ${widget.person.episode.length}', overflow: TextOverflow.ellipsis),
               ],
             ),

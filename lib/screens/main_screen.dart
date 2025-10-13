@@ -17,6 +17,9 @@ class MainScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 15),
               itemCount: state.characters.length,
               itemBuilder: (context, index) {
+                if(index == state.characters.length -1){
+                  context.read<CharacterBloc>().add(NextPageEvent());
+                }
                 return PersonSector(
                   person: state.characters[index],
                 );

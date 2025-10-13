@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 import '../models/person.dart';
 
 part 'favorites_event.dart';
-
 part 'favorites_state.dart';
 
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
@@ -39,10 +38,11 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   }
 
   _new(AddFavoriteEvent event, Emitter emit) {
-    var result = state.favorites;
+    var result = state.favorites.toList();
     result.add(event.favorite);
     emit(state.copyWith(favorites: result));
-    _getTag(GetTagsEvent(), emit);
+    add(GetTagsEvent());
+    add(SetIndexEvent(state.index));
   }
 
   List<Person> _sort(FavoritesState state, int index) {
@@ -94,10 +94,11 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   }
 
   _delete(RemoveFavoriteEvent event, Emitter emit) {
-    var result = state.favorites;
+    var result = state.favorites.toList();
     result.remove(event.favorite);
     emit(state.copyWith(favorites: result));
-    _getTag(GetTagsEvent(), emit);
+    add(GetTagsEvent());
+    add(SetIndexEvent(state.index));
   }
 
   bool consist(Person character) {

@@ -6,3 +6,4 @@ class CharacterEvent extends Equatable{
 }
 
 class GetCharacterEvent extends CharacterEvent{}
+class NextPageEvent extends CharacterEvent{}
