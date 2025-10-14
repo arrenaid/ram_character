@@ -10,15 +10,15 @@
  - есть анимация добавления
 
 ### версии зависимостей
-Flutter 3.35.1
-Dart 3.9.0
-dio: ^5.9.0
-pretty_dio_logger: ^1.4.0
-json_annotation: ^4.9.0
-bloc: ^9.0.1
-flutter_bloc: ^9.1.1
-equatable: ^2.0.7
-shared_preferences: ^2.5.3
+ - Flutter 3.35.1
+ - Dart 3.9.0
+ - dio: ^5.9.0
+ - pretty_dio_logger: ^1.4.0
+ - json_annotation: ^4.9.0
+ - bloc: ^9.0.1
+ - flutter_bloc: ^9.1.1
+ - equatable: ^2.0.7
+ - shared_preferences: ^2.5.3
 
 ### инструкцией по сборке и запуску
 если сделать форк будет необходимо сгренерировать классы для серриализации - flutter packages pub run build_runner build --delete-conflicting-outputs
