@@ -3,21 +3,32 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ram_character/bloc/character_bloc.dart';
 import 'package:ram_character/bloc/favorites_bloc.dart';
 import 'package:ram_character/repositories/ram_repository.dart';
+import 'package:ram_character/repositories/shared_preferences_repository.dart';
 import 'package:ram_character/screens/favorites_screen.dart';
 import 'package:ram_character/screens/main_screen.dart';
 import 'package:ram_character/screens/navi_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  runApp(MyApp(prefs: prefs));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.prefs});
+
+  final SharedPreferences prefs;
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (BuildContext context) => RamRepository(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (BuildContext context) => RamRepository()),
+        RepositoryProvider(
+          create: (context) => SharedPreferencesRepository(prefs: prefs),
+        ),
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -25,7 +36,13 @@ class MyApp extends StatelessWidget {
               repository: RepositoryProvider.of<RamRepository>(context),
             )..add(GetCharacterEvent()),
           ),
-          BlocProvider(create: (context) => FavoritesBloc()),
+          BlocProvider(
+            create: (context) => FavoritesBloc(
+              prefs: RepositoryProvider.of<SharedPreferencesRepository>(
+                context,
+              ),
+            )..add(UpdatePrefsEvent()),
+          ),
         ],
         child: MaterialApp(
           title: 'Rick And Morty Character',

@@ -26,3 +26,4 @@ class RemoveFavoriteEvent extends FavoritesEvent{
   @override
   List<Object?> get props => [favorite];
 }
+class UpdatePrefsEvent extends FavoritesEvent{}

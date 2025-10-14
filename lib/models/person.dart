@@ -34,8 +34,41 @@ class Person {
     required this.created,
   });
 
-  factory Person.fromJson(Map<String, dynamic> json) =>
-      _$PersonFromJson(json);
+  factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);
 
   Map<String, dynamic> toJson() => _$PersonToJson(this);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Person &&
+          // runtimeType == other.runtimeType &&
+          id == other.id &&
+          name == other.name &&
+          status == other.status &&
+          species == other.species &&
+          type == other.type &&
+          gender == other.gender &&
+          // origin == other.origin &&
+          // location == other.location &&
+          image == other.image &&
+          // episode == other.episode &&
+          url == other.url &&
+          created == other.created;
+
+  @override
+  int get hashCode => Object.hash(
+    id,
+    name,
+    status,
+    species,
+    type,
+    gender,
+    origin,
+    location,
+    image,
+    episode,
+    url,
+    created,
+  );
 }

@@ -1,12 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:ram_character/repositories/shared_preferences_repository.dart';
 import '../models/person.dart';
 
 part 'favorites_event.dart';
 part 'favorites_state.dart';
 
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
-  FavoritesBloc()
+  final SharedPreferencesRepository prefs;
+  FavoritesBloc({required this.prefs})
     : super(
         FavoritesState(
           sorted: [],
@@ -19,6 +21,14 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     on<GetTagsEvent>(_getTag);
     on<AddFavoriteEvent>(_new);
     on<RemoveFavoriteEvent>(_delete);
+    on<UpdatePrefsEvent>(_loadPrefs);
+  }
+
+  _upgradePrefs() => prefs.saveFavorites(state.favorites);
+
+  _loadPrefs(UpdatePrefsEvent event, Emitter emit){
+    var result = prefs.loadFavorites();
+    emit(state.copyWith(favorites: result, sorted: result));
   }
 
   _change(SetIndexEvent event, Emitter emit) {
@@ -43,6 +53,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     emit(state.copyWith(favorites: result));
     add(GetTagsEvent());
     add(SetIndexEvent(state.index));
+    _upgradePrefs();
   }
 
   List<Person> _sort(FavoritesState state, int index) {
@@ -99,6 +110,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     emit(state.copyWith(favorites: result));
     add(GetTagsEvent());
     add(SetIndexEvent(state.index));
+    _upgradePrefs();
   }
 
   bool consist(Person character) {
