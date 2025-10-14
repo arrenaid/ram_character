@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ram_character/bloc/favorites_bloc.dart';
+import 'package:ram_character/constants.dart';
 
 import '../widgets/person_sector.dart';
 
@@ -35,6 +36,7 @@ class FavoritesScreen extends StatelessWidget {
                               side: BorderSide(color: Colors.black, width: 2),
                             ),
                             label: Text(state.tags[indexChip]),
+                            labelStyle: tsMacherie,
                             elevation: 0,
                             padding: const EdgeInsets.all(10),
                             selected: state.index == indexChip,

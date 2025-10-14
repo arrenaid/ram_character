@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ram_character/bloc/favorites_bloc.dart';
+import 'package:ram_character/constants.dart';
 
 import '../models/person.dart';
 
@@ -68,21 +69,48 @@ class _PersonSectorState extends State<PersonSector> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Имя: ${widget.person.name}',
+                Text.rich(
                   overflow: TextOverflow.ellipsis,
+                  TextSpan(
+                    text: 'Имя: ',
+                    style: tsNeue,
+                    children: [
+                      TextSpan(text: widget.person.name, style: tsMacherie),
+                    ],
+                  ),
                 ),
-                Text(
-                  'Статус: ${widget.person.status}',
+                Text.rich(
                   overflow: TextOverflow.ellipsis,
+                  TextSpan(
+                    text: 'Статус: ',
+                    style: tsNeue,
+                    children: [
+                      TextSpan(text: widget.person.status, style: tsMacherie),
+                    ],
+                  ),
                 ),
-                Text(
-                  'Расса: ${widget.person.species}, Пол: ${widget.person.gender}.',
+
+                Text.rich(
                   overflow: TextOverflow.ellipsis,
+                  TextSpan(
+                    text: 'Расса: ',
+                    style: tsNeue,
+                    children: [
+                      TextSpan(text: widget.person.species, style: tsMacherie),
+                      TextSpan(text: ', Пол: ', style: tsNeue),
+                      TextSpan(text: widget.person.gender, style: tsMacherie),
+                    ],
+                  ),
                 ),
-                Text(
-                  'Колличество серий: ${widget.person.episode.length}',
+                Text.rich(
                   overflow: TextOverflow.ellipsis,
+                  TextSpan(
+                    text: 'Колличество серий: ',
+                    style: tsNeue,
+                    children: [
+                      TextSpan(text: '${widget.person.episode.length}', style: tsMacherie),
+                    ],
+                  ),
                 ),
               ],
             ),

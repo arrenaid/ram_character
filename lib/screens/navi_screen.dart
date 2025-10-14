@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ram_character/constants.dart';
 import '../bloc/navi_bloc.dart';
 
 class NaviScreen extends StatelessWidget {
@@ -27,7 +28,8 @@ class NaviScreen extends StatelessWidget {
                   selectedItemColor: Colors.pink[800],
                   selectedFontSize: 10,
                   unselectedFontSize: 10,
-                  //selectedLabelStyle: tsTab,
+                  selectedLabelStyle: tsNeue,
+                  unselectedLabelStyle: tsNeue,
                   currentIndex: state.index,
                   items: _getNavigationItems(),
                   onTap: (index) {

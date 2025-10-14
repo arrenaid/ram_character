@@ -14,7 +14,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
           sorted: [],
           favorites: [],
           index: 0,
-          tags: ['все', 'эпизоды'],
+          tags: ['Все', 'Эпизоды'],
         ),
       ) {
     on<SetIndexEvent>(_change);
@@ -37,7 +37,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   }
 
   _getTag(GetTagsEvent event, Emitter emit) {
-    List<String> result = ['все', 'эпизоды'];
+    List<String> result = ['Все', 'Эпизоды'];
     for (var e in state.favorites) {
       result.add(e.gender);
       result.add(e.species);
