@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ram_character/bloc/favorites_bloc.dart';
 import 'package:ram_character/constants.dart';
-
 import '../models/person.dart';
 
 class PersonSector extends StatefulWidget {
@@ -44,7 +43,7 @@ class _PersonSectorState extends State<PersonSector> {
   Widget build(BuildContext context) {
     _set(context.read<FavoritesBloc>().consist(widget.person));
     return Container(
-      height: 100,
+      height: 125,
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
@@ -60,7 +59,7 @@ class _PersonSectorState extends State<PersonSector> {
               placeholderCacheWidth: 50,
               image: widget.person.image,
               fit: BoxFit.cover,
-              height: 75,
+              height: 100,
             ),
           ),
           SizedBox(width: 12),
@@ -97,7 +96,15 @@ class _PersonSectorState extends State<PersonSector> {
                     style: tsNeue,
                     children: [
                       TextSpan(text: widget.person.species, style: tsMacherie),
-                      TextSpan(text: ', Пол: ', style: tsNeue),
+                    ],
+                  ),
+                ),
+                Text.rich(
+                  overflow: TextOverflow.ellipsis,
+                  TextSpan(
+                    text: 'Пол: ',
+                    style: tsNeue,
+                    children: [
                       TextSpan(text: widget.person.gender, style: tsMacherie),
                     ],
                   ),

@@ -44,8 +44,8 @@ class NaviScreen extends StatelessWidget {
   List<BottomNavigationBarItem> _getNavigationItems() {
     return [
       BottomNavigationBarItem(
-        activeIcon: Icon(CupertinoIcons.person_crop_circle_fill),
-          icon:Icon(CupertinoIcons.person_crop_circle),
+        activeIcon: Icon(CupertinoIcons.person_alt_circle_fill),
+          icon:Icon(CupertinoIcons.person_alt_circle),
           label: 'Персонажи'),
       BottomNavigationBarItem(
         activeIcon: Icon(CupertinoIcons.star_circle_fill),

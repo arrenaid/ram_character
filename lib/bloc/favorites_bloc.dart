@@ -29,6 +29,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   _loadPrefs(UpdatePrefsEvent event, Emitter emit){
     var result = prefs.loadFavorites();
     emit(state.copyWith(favorites: result, sorted: result));
+    add(GetTagsEvent());
   }
 
   _change(SetIndexEvent event, Emitter emit) {
