@@ -15,8 +15,17 @@ class PersonSector extends StatefulWidget {
 }
 
 class _PersonSectorState extends State<PersonSector> {
-
   late bool mark;
+  double scale = 1.0;
+  double turn = 0;
+
+  void _changeScale() {
+    setState(() => scale = scale == 1.0 ? 1.4 : 1.0);
+  }
+
+  void _changeTurn() {
+    setState(() => turn = turn == 0 ? 1 : 0);
+  }
 
   @override
   void initState() {
@@ -24,12 +33,11 @@ class _PersonSectorState extends State<PersonSector> {
     super.initState();
   }
 
-  _set(bool value){
+  _set(bool value) {
     setState(() {
       mark = value;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -60,32 +68,62 @@ class _PersonSectorState extends State<PersonSector> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Имя: ${widget.person.name}', overflow: TextOverflow.ellipsis),
-                Text('Статус: ${widget.person.status}', overflow: TextOverflow.ellipsis),
-                Text('Расса: ${widget.person.species}, Пол: ${widget.person.gender}.', overflow: TextOverflow.ellipsis),
-                Text('Колличество серий: ${widget.person.episode.length}', overflow: TextOverflow.ellipsis),
+                Text(
+                  'Имя: ${widget.person.name}',
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  'Статус: ${widget.person.status}',
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  'Расса: ${widget.person.species}, Пол: ${widget.person.gender}.',
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  'Колличество серий: ${widget.person.episode.length}',
+                  overflow: TextOverflow.ellipsis,
+                ),
               ],
             ),
           ),
           IconButton(
             onPressed: () {
-              if (mark) {
-                context.read<FavoritesBloc>().add(
-                  RemoveFavoriteEvent(favorite: widget.person),
-                );
-              } else {
-                context.read<FavoritesBloc>().add(
-                  AddFavoriteEvent(favorite: widget.person),
-                );
-              }
-              _set(!mark);
+              _changeScale();
+              _changeTurn();
             },
-            icon: mark
-                ? Icon(CupertinoIcons.star_fill, color:  Colors.pink[800],)
-                : Icon(
-                    CupertinoIcons.star,
-                    color: ThemeData.dark().primaryColor,
-                  ),
+            icon: AnimatedRotation(
+              duration: const Duration(milliseconds: 500),
+              turns: turn,
+              onEnd: () {
+                if (mark) {
+                  context.read<FavoritesBloc>().add(
+                    RemoveFavoriteEvent(favorite: widget.person),
+                  );
+                } else {
+                  context.read<FavoritesBloc>().add(
+                    AddFavoriteEvent(favorite: widget.person),
+                  );
+                }
+                _set(!mark);
+              },
+              child: AnimatedScale(
+                scale: scale,
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.fastOutSlowIn,
+                onEnd: () {
+                  if (scale == 1.4) {
+                    _changeScale();
+                  }
+                },
+                child: mark
+                    ? Icon(CupertinoIcons.star_fill, color: Colors.pink[800])
+                    : Icon(
+                        CupertinoIcons.star,
+                        color: ThemeData.dark().primaryColor,
+                      ),
+              ),
+            ),
           ),
         ],
       ),
